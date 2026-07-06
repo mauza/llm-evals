@@ -1,0 +1,8 @@
+# Any OpenAI-compatible endpoint works: llama-server, vLLM, OpenRouter, OpenAI.
+# api_key_env names an env var to read the key from (falls back to api_key).
+name: gpt-5.2
+base_url: https://api.openai.com/v1
+model: gpt-5.2
+api_key_env: OPENAI_API_KEY
+params:
+  temperature: 0

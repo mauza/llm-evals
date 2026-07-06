@@ -1,0 +1,24 @@
+name: k8s-cronjob
+version: 1
+type: single
+description: Write a correct k8s CronJob manifest to spec; graded by parsing the YAML.
+trials: 2
+
+prompt: |
+  Write a Kubernetes CronJob manifest with exactly these properties:
+  - name: media-scrub, namespace: media
+  - runs every 15 minutes
+  - image: ghcr.io/mauza/media-scrub:1.4.2
+  - concurrencyPolicy Forbid, successfulJobsHistoryLimit 3
+  - container requests 100m CPU / 128Mi memory, limits 500m CPU / 512Mi memory
+  - restartPolicy OnFailure
+
+  Reply with ONLY the YAML manifest inside a single ```yaml code fence.
+
+acceptance:
+  min_score: 1.0
+
+checks:
+  - type: script
+    name: manifest-valid
+    path: grade.py

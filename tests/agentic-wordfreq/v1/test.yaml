@@ -1,0 +1,21 @@
+name: agentic-wordfreq
+version: 1
+type: agentic
+description: Spec-driven agent loop — build a small CLI in the workspace, graded by grade.py.
+spec: spec.md
+trials: 1
+
+agent:
+  max_steps: 25
+  max_seconds: 600
+  # To use an external agent CLI instead of the built-in bash tool loop,
+  # uncomment (placeholders: {workspace} {spec} {model} {base_url}):
+  # command: 'claude -p "$(cat {spec})" --permission-mode acceptEdits'
+
+acceptance:
+  min_score: 1.0
+
+checks:
+  - type: script
+    name: acceptance-suite
+    path: grade.py

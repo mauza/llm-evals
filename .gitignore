@@ -1,0 +1,6 @@
+# Run artifacts stay local by default; runs/index.jsonl + manifests are the record.
+# If you want full history in git, delete the runs/ line (workspaces can get big).
+runs/
+__pycache__/
+.venv/
+*.egg-info/

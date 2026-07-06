@@ -1,0 +1,8 @@
+# llamacpp-qwen36-27b on the 5090 (llama-server, OpenAI-compatible).
+# Fix base_url to wherever the k8s service is actually exposed.
+name: qwen36-27b
+base_url: http://llamacpp-qwen36-27b.llm.svc.cluster.local:8080/v1  # TODO: real URL/ingress
+model: qwen3.6-27b
+api_key: none
+params:
+  temperature: 0.2

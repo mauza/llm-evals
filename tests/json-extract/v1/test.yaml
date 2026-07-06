@@ -1,0 +1,30 @@
+name: json-extract
+version: 1
+type: single
+description: Extract structured fields from a messy log line into strict JSON.
+trials: 3
+
+prompt: |
+  Extract the following fields from this log line and reply with ONLY a JSON
+  object (no prose, no code fences): timestamp, level, service, pod, message.
+
+  2026-07-04T22:13:08Z [ERROR] svc=media-indexer pod=media-indexer-7f9c4-x2vlk
+  msg="ffprobe exited 1: moov atom not found" attempt=3
+
+acceptance:
+  min_score: 1.0      # every check must pass...
+  min_pass_rate: 0.67 # ...in at least 2 of 3 trials
+
+checks:
+  - type: json
+    name: required-fields
+    require_keys: [timestamp, level, service, pod, message]
+    expect:
+      level: ERROR
+      service: media-indexer
+  - type: regex
+    name: timestamp-verbatim
+    pattern: "2026-07-04T22:13:08Z"
+  - type: not_contains
+    name: no-code-fence
+    value: "```"
